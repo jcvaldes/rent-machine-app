@@ -18,7 +18,6 @@ const ProductTable = () => {
   const [product, setProduct] = useState({});
 
   const onClose = (e) => {
-    debugger;
     setShow(false);
     if (e.target && e.target.value === "") {
       return;
@@ -29,8 +28,9 @@ const ProductTable = () => {
   const makeMessage = (operation) => {
     return `Your ${
       operation === productsOp.Booking ? "estimated" : "total"
-    } price is: <br /> Do you want to proceed?`;
+    } price is: ${product.price} <br /> Do you want to proceed?`;
   };
+
   const handleShow = (op) => {
     setShow(true);
     setOperation(op);
@@ -88,15 +88,16 @@ const ProductTable = () => {
           )}
         </Modal.Body>
       </Modal>
-      <SweetAlert
-        show={showAlert}
-        title="Demo"
-        html
-        text={makeMessage(operation)}
-        onConfirm={() => setShowAlert(false)}
-      />
+      {product && (
+        <SweetAlert
+          show={showAlert}
+          title="Demo"
+          html
+          text={makeMessage(operation)}
+          onConfirm={() => setShowAlert(false)}
+        />
+      )}
     </>
   );
 };
-
 export default ProductTable;

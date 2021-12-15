@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { getProducts } from "../helpers/getProducts";
 import { productsOp } from "../utils/products";
+import * as moment from "moment";
+import { getProduct } from "../helpers/getProducts";
 
 const BookProduct = ({ onClose }) => {
   const products = getProducts(productsOp.Booking);
@@ -11,12 +13,22 @@ const BookProduct = ({ onClose }) => {
     to: "",
   });
   const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.name]: e.target.value });
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    onClose({ ...formState, price: calcPrice() });
+  };
+  const calcPrice = (operation) => {
     debugger;
-    onClose(formState);
+    const from = moment(formState.from);
+    const to = moment(formState.to);
+    const days = to.diff(from, "days");
+    const product = getProduct(+formState.productId);
+    return product.price * days;
   };
   return (
     <Form>

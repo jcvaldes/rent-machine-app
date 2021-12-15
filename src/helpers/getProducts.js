@@ -9,3 +9,8 @@ export const getProducts = (operation) => {
   }
   return products;
 };
+
+export const getProduct = (id) => {
+  let products = JSON.parse(window.localStorage.getItem("productsDb"));
+  return products.find((product) => product.id === id);
+};
