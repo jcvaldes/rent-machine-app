@@ -13,7 +13,7 @@ const BookProduct = ({ onClose }) => {
     <Form>
       <Form.Group className="mb-3" controlId="product">
         <Form.Label>Book a Product</Form.Label>
-        <Form.Select>
+        <Form.Select name="product">
           <option>Select a Product</option>
           {products.map((product) => {
             return (
@@ -27,9 +27,14 @@ const BookProduct = ({ onClose }) => {
 
       <Form.Group className="mb-3" controlId="mileage">
         <Form.Label>From</Form.Label>
-        <Form.Control type="date" min="2018-01-01" max="2022-12-31" />
+        <Form.Control
+          name="from"
+          type="date"
+          min="2018-01-01"
+          max="2022-12-31"
+        />
         <Form.Label>To</Form.Label>
-        <Form.Control type="date" min="2018-01-01" max="2022-12-31" />
+        <Form.Control name="to" type="date" min="2018-01-01" max="2022-12-31" />
       </Form.Group>
       <Button variant="secondary" onClick={onClose}>
         No

@@ -14,7 +14,7 @@ const ReturnProduct = ({ onClose }) => {
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="product">
         <Form.Label>Return a Product</Form.Label>
-        <Form.Select>
+        <Form.Select name="product">
           <option>Select a Product</option>
           {products.map((product) => {
             return (
@@ -27,7 +27,7 @@ const ReturnProduct = ({ onClose }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="mileage">
-        <Form.Control type="text" placeholder="Used Mileage" />
+        <Form.Control type="text" placeholder="Used Mileage" name="mileage" />
       </Form.Group>
       <Button variant="secondary" onClick={onClose}>
         No
