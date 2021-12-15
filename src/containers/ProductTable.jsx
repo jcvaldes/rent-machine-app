@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import { Modal, Table } from "react-bootstrap";
+import { Button, Modal, Table } from "react-bootstrap";
 import data from "../assets/data";
 import ProductItem from "../components/ProductItem";
 import SearchProduct from "../components/SearchProduct";
-import { Button } from "react-bootstrap";
 import "../styles/ProductTable.scss";
 import { productsOp } from "../utils/products";
 import BookProduct from "../components/BookProduct";
 import ReturnProduct from "../components/ReturnProduct";
-
+import SweetAlert from "sweetalert-react";
+import "sweetalert/dist/sweetalert.css";
 const ProductTable = () => {
   const [products, setProducts] = useState(data);
   const [show, setShow] = useState(false);
   const [operation, setOperation] = useState(productsOp.Booking);
-
+  const [showAlert, setShowAlert] = useState(false);
+  const onClose = (e) => {
+    setShow(false);
+    setShowAlert(true);
+  };
   const handleShow = (op) => {
     setShow(true);
     setOperation(op);
+    // renderModal(op);
   };
   const searchProduct = (value) => {
     if (value === "") {
@@ -63,15 +68,21 @@ const ProductTable = () => {
       </div>
       <Modal show={show}>
         <Modal.Body>
-          {operation === productsOp.Booking && <BookProduct />}
-          {operation === productsOp.Return && <ReturnProduct />}
+          {operation === productsOp.Booking && (
+            <BookProduct onClose={onClose} />
+          )}
+          {operation === productsOp.Return && (
+            <ReturnProduct onClose={onClose} />
+          )}
         </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary">No</Button>
-          <Button variant="primary">Yes</Button>
-        </Modal.Footer>
       </Modal>
+      <SweetAlert
+        show={showAlert}
+        title="Demo"
+        html
+        text="ssssss"
+        onConfirm={() => setShowAlert(false)}
+      />
     </>
   );
 
