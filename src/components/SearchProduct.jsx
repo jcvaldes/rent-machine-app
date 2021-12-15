@@ -13,10 +13,6 @@ const SearchProduct = ({ searchProduct }) => {
         placeholder="Search Product"
         onChange={onChange}
       />
-
-      {/* <Button variant="primary" type="submit">
-        Submit
-      </Button> */}
     </Form>
   );
 };
