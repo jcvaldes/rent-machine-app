@@ -15,7 +15,7 @@ const ReturnProduct = ({ onClose }) => {
       <Form.Group className="mb-3" controlId="product">
         <Form.Label>Return a Product</Form.Label>
         <Form.Select name="product">
-          <option>Select a Product</option>
+          <option value="-1">Select a Product</option>
           {products.map((product) => {
             return (
               <option key={product.id} value={product.id}>

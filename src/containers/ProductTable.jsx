@@ -9,14 +9,27 @@ import BookProduct from "../components/BookProduct";
 import ReturnProduct from "../components/ReturnProduct";
 import SweetAlert from "sweetalert-react";
 import "sweetalert/dist/sweetalert.css";
+
 const ProductTable = () => {
   const [products, setProducts] = useState(data);
   const [show, setShow] = useState(false);
   const [operation, setOperation] = useState(productsOp.Booking);
   const [showAlert, setShowAlert] = useState(false);
+  const [product, setProduct] = useState({});
+
   const onClose = (e) => {
+    debugger;
     setShow(false);
+    if (e.target && e.target.value === "") {
+      return;
+    }
+    setProduct(e);
     setShowAlert(true);
+  };
+  const makeMessage = (operation) => {
+    return `Your ${
+      operation === productsOp.Booking ? "estimated" : "total"
+    } price is: <br /> Do you want to proceed?`;
   };
   const handleShow = (op) => {
     setShow(true);
@@ -79,7 +92,7 @@ const ProductTable = () => {
         show={showAlert}
         title="Demo"
         html
-        text="ssssss"
+        text={makeMessage(operation)}
         onConfirm={() => setShowAlert(false)}
       />
     </>
