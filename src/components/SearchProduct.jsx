@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "../styles/SearchProduct.scss";
 
 const SearchProduct = ({ searchProduct }) => {
