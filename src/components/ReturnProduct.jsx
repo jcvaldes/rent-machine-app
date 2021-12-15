@@ -7,10 +7,11 @@ const ReturnProduct = ({ onClose }) => {
   const products = getProducts(productsOp.Return);
   const handleSubmit = (e) => {
     e.preventDefault();
+    debugger;
     onClose(e);
   };
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="product">
         <Form.Label>Return a Product</Form.Label>
         <Form.Select>
@@ -31,7 +32,7 @@ const ReturnProduct = ({ onClose }) => {
       <Button variant="secondary" onClick={onClose}>
         No
       </Button>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="primary" type="submit">
         Yes
       </Button>
     </Form>

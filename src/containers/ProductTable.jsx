@@ -21,7 +21,6 @@ const ProductTable = () => {
   const handleShow = (op) => {
     setShow(true);
     setOperation(op);
-    // renderModal(op);
   };
   const searchProduct = (value) => {
     if (value === "") {
@@ -85,8 +84,6 @@ const ProductTable = () => {
       />
     </>
   );
-
-  // <div>{products.map((product) => {})}</div>;
 };
 
 export default ProductTable;
