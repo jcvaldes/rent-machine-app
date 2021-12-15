@@ -11,7 +11,7 @@ export default [
     max_durability: 3000,
     mileage: null,
     price: 4500,
-    minimum_rent_period: 1,
+    minimum_rent_period: 3,
   },
   {
     id: 2,

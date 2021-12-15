@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { getProducts } from "../helpers/getProducts";
 import { productsOp } from "../utils/products";
 import * as moment from "moment";
@@ -12,6 +12,7 @@ const BookProduct = ({ onClose }) => {
     from: "",
     to: "",
   });
+  const [showAlert, setShowAlert] = useState(false);
   const handleChange = (e) => {
     setFormState({
       ...formState,
@@ -20,10 +21,18 @@ const BookProduct = ({ onClose }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    onClose({ ...formState, price: calcPrice() });
+    const from = moment(formState.from);
+    const to = moment(formState.to);
+    const days = to.diff(from, "days");
+    const product = getProduct(+formState.productId);
+    debugger;
+    if (days < product.minimum_rent_period) {
+      setShowAlert(true);
+    } else {
+      onClose({ ...formState, price: calcPrice() });
+    }
   };
   const calcPrice = (operation) => {
-    debugger;
     const from = moment(formState.from);
     const to = moment(formState.to);
     const days = to.diff(from, "days");
@@ -45,7 +54,6 @@ const BookProduct = ({ onClose }) => {
           })}
         </Form.Select>
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="mileage">
         <Form.Label>From</Form.Label>
         <Form.Control
@@ -64,6 +72,7 @@ const BookProduct = ({ onClose }) => {
           onChange={handleChange}
         />
       </Form.Group>
+      {showAlert && <Alert variant="danger">No se puede alquilar</Alert>}
       <Button variant="secondary" onClick={onClose}>
         No
       </Button>
