@@ -63,10 +63,8 @@ const ProductTable = () => {
   };
   const searchProduct = (value) => {
     if (value === "") {
-      debugger;
       setProducts(prodData);
     } else {
-      debugger;
       const productsFiltered = products.filter((p) => {
         return p.name.toLowerCase().startsWith(value.toLowerCase());
       });
@@ -119,6 +117,7 @@ const ProductTable = () => {
       </Modal>
       {product && (
         <SweetAlert
+          title=""
           show={showAlert}
           html
           text={makeMessage(operation)}
