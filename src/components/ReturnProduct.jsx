@@ -3,11 +3,10 @@ import { Form, Button } from "react-bootstrap";
 import { getProducts } from "../helpers/getProducts";
 import { productsOp } from "../utils/products";
 
-const ReturnProduct = ({ onClose }) => {
+const ReturnProduct = ({ onClose, setShowModal }) => {
   const products = getProducts(productsOp.Return);
   const handleSubmit = (e) => {
     e.preventDefault();
-    debugger;
     onClose(e);
   };
   return (
@@ -29,7 +28,7 @@ const ReturnProduct = ({ onClose }) => {
       <Form.Group className="mb-3" controlId="mileage">
         <Form.Control type="text" placeholder="Used Mileage" name="mileage" />
       </Form.Group>
-      <Button variant="secondary" onClick={onClose}>
+      <Button variant="secondary" onClick={() => setShowModal(false)}>
         No
       </Button>
       <Button variant="primary" type="submit">

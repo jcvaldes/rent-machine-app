@@ -5,7 +5,7 @@ import { productsOp } from "../utils/products";
 import * as moment from "moment";
 import { getProduct } from "../helpers/getProducts";
 
-const BookProduct = ({ onClose }) => {
+const BookProduct = ({ onClose, setShowModal }) => {
   const products = getProducts(productsOp.Booking);
   const [formState, setFormState] = useState({
     productId: 0,
@@ -25,7 +25,6 @@ const BookProduct = ({ onClose }) => {
     const to = moment(formState.to);
     const days = to.diff(from, "days");
     const product = getProduct(+formState.productId);
-    debugger;
     if (days < product.minimum_rent_period) {
       setShowAlert(true);
     } else {
@@ -40,7 +39,7 @@ const BookProduct = ({ onClose }) => {
     return product.price * days;
   };
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="product">
         <Form.Label>Book a Product</Form.Label>
         <Form.Select name="productId" onChange={handleChange}>
@@ -72,11 +71,11 @@ const BookProduct = ({ onClose }) => {
           onChange={handleChange}
         />
       </Form.Group>
-      {showAlert && <Alert variant="danger">No se puede alquilar</Alert>}
-      <Button variant="secondary" onClick={onClose}>
+      {showAlert && <Alert variant="danger">Not Available</Alert>}
+      <Button variant="secondary" onClick={() => setShowModal(false)}>
         No
       </Button>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
+      <Button variant="primary" type="submit">
         Yes
       </Button>
     </Form>
